@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="540fa658-b7b2-4c25-95dd-c5b371e7691f" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/public/views/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/components/ProtectedRoute.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/components/invoiceForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/components/withRouter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/actionTypes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/actions/generalActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/actions/vendorActions.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/axiosInstance.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/endpoints.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/fetchVendors.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/general.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/reducers/generalReducers.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/reducers/vendorReducers.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/requests/authServices.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/requests/vendorRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/data/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/reportWebVitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/dashboard/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/global/LogoutScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/global/Sidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/global/Topbar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/theme.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/vendorsScreen/VendorDetailScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/scenes/vendorsScreen/VendorsScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/setupTests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/incomewepapp/src/views/HomepageView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grigoris-warehouse/db_demo.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Grigoris-warehouse/db_demo.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.vs/ProjectSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.vs/VSWorkspaceState.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.vs/incomewepapp/project-colors.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.vs/incomewepapp/v17/.suo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/incomewepapp/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IncomeApp/package-lock.json" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="8124" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="invoiceForm.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/incomewepapp/src/components/invoiceForm.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomepageView.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/incomewepapp/src/views/HomepageView.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>post</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/general.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/requests/authServices.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/actionTypes.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/scenes/dashboard/index.jsx" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/scenes/vendorsScreen/VendorsScreen.jsx" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/actions/vendorActions.jsx" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/data/axiosInstance.jsx" />
+        <option value="$PROJECT_DIR$/incomewepapp/src/components/invoiceForm.jsx" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/incomewepapp/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/Grigoris-warehouse/frontend/source/paper-dashboard-master/package.json" />
+      <path value="$PROJECT_DIR$/Grigoris-warehouse/frontend/static/daterangepicker-master/package.json" />
+      <path value="$PROJECT_DIR$/Grigoris-warehouse/static/vendor/select2/package.json" />
+      <path value="$PROJECT_DIR$/incomewepapp/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-238" />
+    <option name="y" value="215" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scenes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scenes" type="462c0819:PsiDirectoryNode" />
+              <item name="vendorsScreen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeEcosystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeEcosystem" type="462c0819:PsiDirectoryNode" />
+              <item name="incomewepapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\IncomeEcosystem\incomewepapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\IncomeEcosystem" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="540fa658-b7b2-4c25-95dd-c5b371e7691f" name="Default" comment="" />
+      <created>1679321782607</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679321782607</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32943678" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18697916" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/endpoints.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/general.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" lean-forward="true" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/endpoints.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/general.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="62" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" lean-forward="true" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/endpoints.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/general.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/general.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/public/views/login.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/requests/authServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/endpoints.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actionTypes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/axiosApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actions/authActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/dashboard/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="97" selection-start-line="15" selection-start-column="97" selection-end-line="15" selection-end-column="97" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/reducers/authReducers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="14" column="79" selection-start-line="14" selection-start-column="79" selection-end-line="14" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/global/loginScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/actions/vendorActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/data/axiosInstance.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/views/HomepageView.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/vendorsScreen/VendorsScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="3" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/scenes/vendorsScreen/VendorDetailScreen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="128" column="97" lean-forward="true" selection-start-line="128" selection-start-column="97" selection-end-line="128" selection-end-column="204" />
+          <folding>
+            <element signature="e#0#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/incomewepapp/src/components/invoiceForm.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
