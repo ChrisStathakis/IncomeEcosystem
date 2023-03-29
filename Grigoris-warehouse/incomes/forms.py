@@ -8,4 +8,4 @@ class IncomeForm(BaseForm, forms.ModelForm):
     
     class Meta:
         model = Income
-        fields = ['date_expired', 'sum_z' ,'pos', 'order_cost', 'extra', 'notes']
+        fields = ['date_expired', 'sum_z' ,'pos', 'order_cost', 'extra', 'notes', 'taxes_6', 'taxes_13', 'taxes_24']

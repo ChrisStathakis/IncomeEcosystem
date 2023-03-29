@@ -17,6 +17,7 @@ from .forms import VendorForm, InvoiceVendorDetailForm, EmployerForm, PaymentFor
 from costumers.models import Costumer
 from .forms import PaycheckForm
 
+
 @method_decorator(staff_member_required, name='dispatch')
 class HomepageView(TemplateView):
     template_name = 'vendors/homepage.html'
@@ -182,7 +183,6 @@ class NoteUpdateView(UpdateView):
         context['back_url'] = self.get_success_url()
         return context
 
-    
 
 @staff_member_required
 def delete_note_view(request, pk):
@@ -237,6 +237,7 @@ class PaycheckListView(ListView):
         print(self.object_list.count())
         return context
 
+
 @staff_member_required
 def paycheck_create_view(request):
     context = dict()
@@ -250,7 +251,6 @@ def paycheck_create_view(request):
     context['page_title'] = 'ΔΗΜΙΟΥΡΓΙΑ ΕΠΙΤΑΓΗΣ'
     context['back_url'] = reverse('vendors:paycheck_list')
     return render(request, 'form_view.html', context)
-
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -275,10 +275,8 @@ class PaycheckUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-
 @staff_member_required
 def paycheck_delete_view(request, pk):
     instance = get_object_or_404(Paycheck, id=pk)
-    print ('', instance)
     instance.delete()
     return redirect(instance.vendor.get_edit_url())

@@ -134,6 +134,11 @@ class Invoice(models.Model):
     final_value = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='Αξία', default=0.00)
     description = models.TextField(blank=True, verbose_name='Λεπτομεριες')
 
+    # only for taxes
+    taxes_6 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 6%', default=0.00)
+    taxes_13 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 13%', default=0.00)
+    taxes_24 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 24%', default=0.00)
+
     class Meta:
         ordering = ['-date']
 
@@ -155,13 +160,11 @@ class Invoice(models.Model):
     @staticmethod
     def filters_data(request, qs):
         date_start, date_end, date_range = initial_date(request, 6)
-        print('start', date_start, 'end', date_end)
         search_name = request.GET.get('search_name', None)
         qs = qs.filter(title__icontains=search_name) if search_name else qs
         if date_start and date_end:
-            print('hitted!', date_end, date_start)
+
             qs = qs.filter(date__range=[date_start, date_end])
-        print(qs.count())
         return qs
 
 

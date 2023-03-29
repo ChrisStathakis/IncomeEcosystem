@@ -7,7 +7,25 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Συνολικα Εξοδα περιοδου <span style='color:red'> {{ total_expenses }} {{ currency }}</span></h4>
+                        <h4>Συνολικα Εξοδα περιοδου <span style='color:red'> {{ total_expenses|floatformat:'2' }} {{ currency }}</span></h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ΦΠΑ 6%</th>
+                                    <th>ΦΠΑ 13% </th>
+                                    <th>ΦΠΑ 24%</th>
+                                    <th>ΣΥΝΟΛΟ ΦΠΑ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ total_6 }}</td>
+                                    <td>{{ total_13 }} </td>
+                                    <td>{{ total_24 }} </td>
+                                    <td>{{ total_taxes }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Filters
                         </a>

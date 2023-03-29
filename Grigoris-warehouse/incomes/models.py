@@ -20,6 +20,11 @@ class Income(models.Model):
     value = models.DecimalField(decimal_places=2, max_digits=20, default=0, verbose_name='Πραγματικο Συνολο')
     cash = models.DecimalField(decimal_places=2, max_digits=20, default=0, verbose_name='Μετρητα')
 
+     # only for taxes
+    taxes_6 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 6%', default=0.00)
+    taxes_13 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 13%', default=0.00)
+    taxes_24 = models.DecimalField(decimal_places=2, max_digits=20, verbose_name='ΠΟΣΟ ΦΠΑ 24%', default=0.00)
+
     class Meta:
         ordering = ['-date_expired']
 

@@ -21,6 +21,7 @@ from general_expenses.models import GeneralExpense
 from .tools import sort_months
 from .models import TaxesModifier
 
+
 @method_decorator(staff_member_required, name='dispatch')
 class AnalysisHomepage(TemplateView):
     template_name = 'analysis/homepage.html'
@@ -45,6 +46,10 @@ class AnalysisIncomeView(ListView):
         total_pos = self.object_list.aggregate(Sum('pos'))['pos__sum'] if self.object_list.exists() else 0
         total_cash = total_z - total_pos
         total_order = self.object_list.aggregate(Sum('order_cost'))['order_cost__sum'] if self.object_list.exists() else 0
+        total_6 = self.object_list.aggregate(Sum('taxes_6'))['taxes_6__sum'] if self.object_list.exists() else 0
+        total_13 = self.object_list.aggregate(Sum('taxes_13'))['taxes_13__sum'] if self.object_list.exists() else 0
+        total_24 = self.object_list.aggregate(Sum('taxes_24'))['taxes_24__sum'] if self.object_list.exists() else 0
+        total_taxes = total_6 + total_13 + total_24
         total = self.object_list.aggregate(Sum('value'))['value__sum'] if self.object_list.exists() else 0
         # invoices_per_month = invoices.annotate(month=TruncMonth('date')).values('month').annotate(
         #     total=Sum('final_value')).values('month', 'total').order_by('month')
@@ -92,6 +97,11 @@ class AnalysisOutcomeView(TemplateView):
         payroll_analysis = payrolls.values('person__title').annotate(total=Sum('final_value')).order_by('-total')
         payroll_analysis_per_month = payrolls.annotate(month=TruncMonth('date_expired')).values('month').\
             annotate(total=Sum('final_value')).values('month', 'total').order_by('month')
+        
+        total_6 = invoices.aggregate(Sum('taxes_6'))['taxes_6__sum'] if invoices.exists() else 0
+        total_13 = invoices.aggregate(Sum('taxes_13'))['taxes_13__sum'] if invoices.exists() else 0
+        total_24 = invoices.aggregate(Sum('taxes_24'))['taxes_24__sum'] if invoices.exists() else 0
+        total_taxes = total_6 + total_13 + total_24
 
         # get unique months
         months = sort_months([analysis_invoices_per_month, analysis_bills_per_month, payroll_analysis_per_month, generic_expenses_analysis_per_month])
@@ -242,6 +252,16 @@ class BalanceSheetView(TemplateView):
 
         # chart analysis
         months = sort_months([incomes_per_month, invoices_per_month, payroll_per_month, bills_per_month, general_per_month])
+
+        incomes_total_6 = incomes.aggregate(Sum('taxes_6'))['taxes_6__sum'] if incomes.exists() else 0
+        incomes_total_13 = incomes.aggregate(Sum('taxes_13'))['taxes_13__sum'] if incomes.exists() else 0
+        incomes_total_24 = incomes.aggregate(Sum('taxes_24'))['taxes_24__sum'] if incomes.exists() else 0
+        incomes_total_taxes = incomes_total_6 + incomes_total_13 + incomes_total_24
+
+        expenses_total_6 = invoices.aggregate(Sum('taxes_6'))['taxes_6__sum'] if invoices.exists() else 0
+        expenses_total_13 = invoices.aggregate(Sum('taxes_13'))['taxes_13__sum'] if invoices.exists() else 0
+        expenses_total_24 = invoices.aggregate(Sum('taxes_24'))['taxes_24__sum'] if invoices.exists() else 0
+        expenses_total_taxes = expenses_total_6 + expenses_total_13 + expenses_total_24
 
         result_per_months = []
         for month in months:
