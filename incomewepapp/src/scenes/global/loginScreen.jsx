@@ -7,8 +7,6 @@ import { Navigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -22,17 +20,15 @@ const LoginScreen = (props) => {
     const handleSubmit = (event) => {
         console.log(props);
         event.preventDefault();
-        const data = {username: username, password: password}
-        props.loginAction(data)
-
-
+        const data = {username: username, password: password};
+        props.loginAction(data);
       };
 
     const handleUsername = (event) => {setUsername(event.target.value)};
     const handlePassword = (event) => {setPassword(event.target.value)};
 
 
-    return props.isAuthenticated ?<Navigate to='/' /> :(
+    return props.isAuthenticated ? <Navigate to='/' /> :(
         <Box
           sx={{
             marginTop: 8,

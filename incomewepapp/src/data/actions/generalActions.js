@@ -10,14 +10,14 @@ export const searchBarAction = (q) => dispatch =>{
         type: SEARCH,
         payload: q
     })
-}
+};
 
 export const clearSearchBarAction = () => dispatch => {
     
     return dispatch ({
         type: CLEAR_SEARCH,
     })
-}
+};
 
 
 export const fetchPaymentMethod = () => dispatch => {
@@ -30,4 +30,4 @@ export const fetchPaymentMethod = () => dispatch => {
                 })
             }
         )
-}
+};

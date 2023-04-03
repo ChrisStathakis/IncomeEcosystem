@@ -3,10 +3,10 @@ import {
     INVOICE_LIST_ENDPOINT,
     INVOICE_UPDATE_ENDPOINT,
     PAYMENT_LIST_ENDPOINT,
-    VENDORS_LIST_ENDPOINT, VENDOR_DETAIL_ENDPOINT
+    VENDORS_LIST_ENDPOINT, VENDOR_DETAIL_ENDPOINT, PAYMENT_UPDATE_ENDPOINT
 } from "../endpoints";
 import {
-    CREATE_VENDOR_INVOICE,
+    CREATE_VENDOR_INVOICE, UPDATE_PAYMENT,
     CREATE_VENDOR_PAYMENT, 
     FETCH_VENDOR, FETCH_VENDORS, FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, UPDATE_VENDOR, DELETE_VENDOR_INVOICE, UPDATE_VENDOR_INVOICE
 } from "../actionTypes"
@@ -75,6 +75,7 @@ export const fetchInvoices = (q='') => dispatch => {
                     date: ele.date,
                     title: ele.title,
                     value: ele.final_value,
+                    payment_method: ele.payment_method
                 
                 }))
                 const invoices = {...response, results: data}
@@ -129,23 +130,24 @@ export const createInvoice = (data) => dispatch => {
 
 export const updateInvoice = (data) => dispatch => {
     const endpoint = INVOICE_UPDATE_ENDPOINT + `${data.id}/`;
-    axiosInstance.put(endpoint)
+    axiosInstance.put(endpoint, data)
         .then(
             respData=>{
                 const vendor_endpoint = VENDOR_DETAIL_ENDPOINT + `${data.vendor}`;
                 axiosInstance.get(vendor_endpoint)
                     .then(
                         response =>{
-                            return dispatch({
+                            dispatch({
                                 type: UPDATE_VENDOR_INVOICE,
+                                vendor: response.data,
                                 payload: respData.data,
-                                vendor: response.data
                             })
                         }
                     )
             }
         )
-}
+};
+
 
 export const fetchPayments = (q='') => dispatch =>{
     const endpoint = PAYMENT_LIST_ENDPOINT + q;
@@ -167,16 +169,48 @@ export const fetchPayments = (q='') => dispatch =>{
                 })
             }
         )
-}
+};
+
+
+
 
 export const createPayment = (data) => dispatch => {
     axiosInstance.post(PAYMENT_LIST_ENDPOINT, data)
         .then(
+            respData=> {
+                const endpoint = `${VENDOR_DETAIL_ENDPOINT}${data.vendor}/`;
+                axiosInstance.get(endpoint)
+                    .then(
+                        response=>{
+                            return dispatch({
+                                type: CREATE_VENDOR_PAYMENT,
+                                payload: respData.data,
+                                vendor: response.data
+                            })
+                        }
+                    )
+
+            }
+        )
+};
+
+
+export const updatePayment = (data) => dispatch =>{
+    const endpoint = PAYMENT_UPDATE_ENDPOINT + `${data.id}/`;
+    axiosInstance.put(endpoint, data)
+        .then(
             respData => {
-                return dispatch({
-                    type: CREATE_VENDOR_PAYMENT,
-                    payload: respData.data
-                })
+                const vendor_endpoint = `${VENDOR_DETAIL_ENDPOINT}${data.vendor}/`;
+                axiosInstance.get(vendor_endpoint)
+                    .then(
+                        response =>{
+                            return dispatch({
+                                type: UPDATE_PAYMENT,
+                                vendor: response.data,
+                                payload: respData.data
+                            })
+                        }
+                    )
             }
         )
 }

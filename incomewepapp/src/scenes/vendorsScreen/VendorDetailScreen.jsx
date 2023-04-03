@@ -1,28 +1,54 @@
-import { Typography, Box, Grid, TextField, Button, Table, TableHead, TableCell, TableBody, TableRow, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Typography ,Box, Grid, TextField, Button, Table, TableHead, TableCell, TableBody, TableRow, FormControl, InputLabel, Select, MenuItem, Modal } from "@mui/material";
+
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { compose } from 'redux';
 import withRouter from '../../components/withRouter';
 import { connect } from 'react-redux';
 import { DataGrid } from "@mui/x-data-grid";
-import { fetchInvoices, fetchPayments, createInvoice, fetchVendor } from '../../data/actions/vendorActions';
-import { fetchPaymentMethod } from "../../data/actions/generalActions"
+import { fetchInvoices, fetchPayments, createInvoice, createPayment, fetchVendor } from '../../data/actions/vendorActions';
+import { fetchPaymentMethod } from "../../data/actions/generalActions";
+import InvoiceFormView from './components/invoiceForm';
+import PaymentForm from './components/paymentForm';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateField } from '@mui/x-date-pickers/DateField';
+
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} />
 }
 
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    color: 'black',
+    border: '2px solid #000',
+    boxShadow: 24,
+};
+
 const invoiceColumns = [
     { field: 'date', headerName: 'Date', width: 150 },
     { field: 'title', headerName: 'Title', flex: 1, cellClassName: "name-column--cell", },
-    { field: 'value', headerName: 'Balance', flex:1 },
-    { field: 'button', headerName: 'Details', flex:1 , renderCell: (cellValues) => <Button variant="contained"  color="secondary">Edit</Button>}
+    { field: 'payment_method', headerName: 'Payment Method', flex:1 },
+    { field: 'value', headerName: 'Value', flex:1 },
+    { field: 'button', headerName: 'Details', flex:1 , renderCell: (cellValues) => <Button  variant="contained"  color="secondary">Edit</Button>}
   ];
+
+
+const paymentColumns = [
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'title', headerName: 'Title', flex: 1, cellClassName: "name-column--cell", },
+    { field: 'payment_method', headerName: 'Payment Method', flex:1 },
+    { field: 'value', headerName: 'Value', flex:1 },
+    { field: 'button', headerName: 'Details', flex:1 , renderCell: (cellValues) => <Button  variant="contained"  color="secondary">Edit</Button>}
+];
 
 class VendorDetailScreen extends React.Component{
 
@@ -30,6 +56,17 @@ class VendorDetailScreen extends React.Component{
         super(props);
         this.state = {
             vendor: {},
+            showEditInvoiceForm: false,
+            editInvoice: {
+                show: false,
+                vendor: '',
+                invoice: ''
+            },
+            editPayment: {
+                show: false,
+                vendor: '',
+                payment: ''
+            },
             invoice: {
                 title: '',
                 value: 0,
@@ -38,10 +75,18 @@ class VendorDetailScreen extends React.Component{
                 extra_value: 0,
 
             },
+            payment_form: {
+                date: '',
+                title: '',
+                payment_method: '',
+                vendor: '',
+                value: ''
+            }
            
         }
     }
 
+    handleShowInvoiceForm = () => {this.setState({showInvoiceForm: !this.state.showInvoiceForm})}
 
 
     componentDidMount(){
@@ -56,41 +101,72 @@ class VendorDetailScreen extends React.Component{
     handleEdit = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        const vendor = {...this.state.vendor, [name]: value}
+        const vendor = {...this.state.vendor, [name]: value};
         this.setState({vendor: vendor})
-    }
+    };
 
     handleSubmitEdit = () =>{
         console.log(this.state.vendor);
-    }
+    };
 
     handleInvoice = (e) => {
-        console.log('e', e)
         const name = e.target.name;
         const value = e.target.value;
-        const invoice = {...this.state.invoice, [name]:value}
+        const invoice = {...this.state.invoice, [name]:value};
         this.setState({invoice: invoice})
-    }
+    };
 
-    handleDate = (value) => {
-        console.log('value', value.date())
-        console.log('value', value)
-        const date = value.value;
-        
+    handlePayment = (e) => {
+        const { name, value } = e.target;
+        const paymentForm = {...this.state.payment_form, [name]: value};
+        this.setState({payment_form: paymentForm});
+    };
+
+    submitPayment = () => {
+        const id  = this.props.router.params.vendor_id;
+        const data = {...this.state.payment_form, vendor:id};
+        this.props.createPayment(data);
+
+    };
+
+    handleEditInvoice = (row) => {
+        const editInvoice = {vendor:this.props.vendor, invoice:row, show:true};
+        this.setState({
+            ...this.state,
+            editInvoice: editInvoice
+        })
+    };
+
+    handleEditPayment = (row) => {
+        const editPayment = { vendor:this.props.vendor, instance: row, show:true}
+        this.setState({
+            ...this.state,
+            editPayment: editPayment
+        })
     }
 
     handleSubmitInvoice = () => {
         const id  = this.props.router.params.vendor_id;
-        const data = {...this.state.invoice, vendor:id}
+        const data = {...this.state.invoice, vendor:id};
         this.props.createInvoice(data);
-
         
+    };
+
+    closeFormWindow = () => {
+        const editPayment = {...this.state.editPayment, show: false};
+        const editInvoice = { ...this.state.editInvoice, show: false};
+        this.setState({
+            ...this.state,
+            editPayment: editPayment,
+            editInvoice: editInvoice
+        })
     }
 
     render() {
-        const { invoice } = this.state;
-        const { invoices, payments, paymentMethods, vendor } = this.props;
-       
+        const { invoice, payment_form, editInvoice, editPayment } = this.state;
+        const { invoices, payments, paymentMethods, vendor, isAuthenticated } = this.props;
+        if (isAuthenticated === 'false' || isAuthenticated === null){return <Navigate to='/login/' />}
+
         return (
            <div>
                 <Box 
@@ -123,10 +199,9 @@ class VendorDetailScreen extends React.Component{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                            }}>                        <Typography>CREATE INVOICE</Typography>
-                                
-                            
-                                <input label='Date' value={invoice.date} type='date' name='date' className="MuiInputBase-input MuiOutlinedInput-input css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input" 
+                            }}>
+                            <Typography>CREATE INVOICE</Typography>
+                            <input label='Date' value={invoice.date} type='date' name='date' className="MuiInputBase-input MuiOutlinedInput-input css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input"
                                 onChange={this.handleInvoice}/>
                                 <FormControl fullWidth>
                                     <InputLabel id="payment_method_label">Payment Method</InputLabel>
@@ -151,37 +226,48 @@ class VendorDetailScreen extends React.Component{
                     </Grid>
                     <Grid item xs={4}>
                         <Typography>CREATE  PAYMENT</Typography>
+                        <Box>
+                            <FormControl fullWidth>
+                                <InputLabel id="payment_method_label">Date</InputLabel>
+                                <input value={payment_form.date} type='date' name='date' className="MuiInputBase-input MuiOutlinedInput-input css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input"
+                                onChange={this.handlePayment}/>
+                            </FormControl>
+
+                            <FormControl fullWidth>
+                                 <InputLabel id="payment_method_label">Payment Method</InputLabel>
+                                 <Select
+                                        labelId="payment_method_label"
+                                        id="payment_method"
+                                        value={invoice.payment_method}
+                                        name="payment_method"
+                                        label="Payment Method"
+                                        onChange={this.handleInvoice}
+                                 >
+                                        {paymentMethods.results ? paymentMethods.results.map(ele=>{return <MenuItem value={ele.id}>{ele.title}</MenuItem>}): null}</Select>
+
+                             </FormControl>
+                             <TextField  onChange={this.handlePayment} sx={{ marginTop:2 }}  value={payment_form.title} name='title' label='Title' InputLabelProps={{ shrink: true }} fullWidth />
+                             <TextField type='number' onChange={this.handlePayment} sx={{ marginTop:2 }}  value={payment_form.value} name='value' label='Value' InputLabelProps={{ shrink: true }} fullWidth />
+
+                             <Button onClick={this.submitPayment} variant="contained" sx={{ marginTop:2 }}>Save</Button>
+                        </Box>
                     </Grid>
                 </Grid>
-
+                {editInvoice.show === false && editPayment.show === false ? 
                 <Grid container spacing={3}>
                     <Grid item xs={6}>
-                        <Typography variant="h1" component="h4">Invoices</Typography>
-                         {invoices.results ? <DataGrid rows={invoices.results} columns={invoiceColumns} getRowId={(row)=> row.id}  /> :null}
+                        <Typography variant="h1"  component="h4">Invoices</Typography>
+                         {invoices.results ? <DataGrid onRowClick={(params)=> this.handleEditInvoice(params.row)} sx={{height: '500px'}} rows={invoices.results} columns={invoiceColumns} getRowId={(row)=> row.id}  /> :null}
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant="h1" component="h4">Payments</Typography>
-                        
-                         <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableHead>Date</TableHead>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {payments.results ? payments.results.map(ele=>{
-                                    return (
-                                        <TableRow>
-                                            <TableCell>{ele.date}</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                                    : null
-                                }
-                            </TableBody>
-                        </Table>
+                        {payments.results ? <DataGrid onRowClick={(params)=> this.handleEditInvoice(params.row)} sx={{height: '500px'}} rows={payments.results} columns={paymentColumns} getRowId={(row)=> row.id} /> : null}
                     </Grid>
-                </Grid>
+                </Grid> : null}
+               
+                {editInvoice.show ? <InvoiceFormView instance={editInvoice.invoice} vendor={editInvoice.vendor} action={this.closeFormWindow} />: null}
+                {editPayment.show ? <PaymentForm instance={editPayment.payment} vendor={editPayment.vendor} action={this.closeFormWindow} /> :null }
+              
             </div>
               
             
@@ -189,12 +275,13 @@ class VendorDetailScreen extends React.Component{
     }
 }
 
-
 const mapStateToProps = state =>({
     invoices: state.vendorReducers.invoices,
     payments: state.vendorReducers.payments,
     paymentMethods: state.generalReducers.paymentMethods,
-    vendor: state.vendorReducers.vendor
-})
+    vendor: state.vendorReducers.vendor,
+    isAuthenticated: state.authReducer.isAuthenticated
+});
 
-export default compose(withRouter, connect(mapStateToProps, {fetchInvoices, fetchPayments, createInvoice, fetchPaymentMethod, fetchVendor }))(VendorDetailScreen);
+
+export default compose(withRouter, connect(mapStateToProps, {fetchInvoices, fetchPayments, createInvoice, fetchPaymentMethod, fetchVendor, createPayment }))(VendorDetailScreen);

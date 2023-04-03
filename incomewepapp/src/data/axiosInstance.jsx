@@ -16,7 +16,6 @@ const axiosInstance = axios.create({
 
 
 
-
 axiosInstance.interceptors.response.use(
     response => response,
     error=>{
@@ -28,28 +27,29 @@ axiosInstance.interceptors.response.use(
 
          // Prevent infinite loops early
          if (error.response.status === 401 && originalRequest.url === REFRESH_TOKEN_ENDPOINT) {
-            window.location.href = '/login/';
             store.dispatch({type: LOGIN_FAIL});
-            console.log(error.response.message);
+            console.log('refresh token 401', error.response.message);
             return Promise.reject({message: '401 Exception'});
         }
         if (error.response.data.code === "token_not_valid" &&
-        error.response.status === 401 &&
-        error.response.statusText === "Unauthorized")
-        {
-            const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+            error.response.status === 401 &&
+            error.response.statusText === "Unauthorized")
+        {   
+            const state = store.getState()
+            const refreshToken = state.authReducer.refreshToken;
             if (typeof refreshToken === 'undefined'){
                 store.dispatch({type: LOGIN_FAIL});
-                console.log(error.response.message);
+                console.log('token not found', error.response.message);
                 return Promise.reject({message: 'logout'})
             }
 
             if (refreshToken){
-                console.log('continue');
+
                 //const tokenParts = JSON.parse(Buffer.from(refreshToken, 'base64').split('.')[1])
                 const tokenParts =  Buffer.from(refreshToken, 'utf8').toString('base64');
                 // const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
                 // exp date in token is expressed in seconds, while now() returns milliseconds:
+              
                 const now = Math.ceil(Date.now() / 1000);
                 if (tokenParts.exp > now) {
                     return axiosInstance
@@ -58,21 +58,21 @@ axiosInstance.interceptors.response.use(
                         localStorage.setItem(ACCESS_TOKEN, response.data.access);
                         axiosInstance.defaults.headers['Authorization'] = "Bearer " + response.data.access;
                         originalRequest.headers['Authorization'] = "Bearer " + response.data.access;
-                        store.dispatch({type: UPDATE_TOKEN, payload: response.data})
+                        store.dispatch({type: UPDATE_TOKEN, payload: response.data});
                         return axiosInstance(originalRequest);
                     })
                     .catch(err => {
-                        console.log(err)
+                        console.log('refresh update failed', err);
+                        store.dispatch({type: LOGIN_FAIL})
                     });
                 } else {
-                    
-                    localStorage.removeItem('isAuthenticated');
-                    window.location.href = '/login/';
+                    console.log('refresh update failed else');
+                    store.dispatch({type: LOGIN_FAIL});
                 }
             } else {
                 console.log("Refresh token not available.");
                 localStorage.removeItem('isAuthenticated');
-                window.location.href = '/login/';
+
             }
     }
 

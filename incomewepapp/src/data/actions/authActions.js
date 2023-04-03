@@ -24,15 +24,9 @@ export const loginAction = data => dispatch => {
         )
 };
 
-export const refreshTokenAction = (token) => dispatch => {
-    return dispatch({
-        type: REFRESH_TOKEN,
-        payload: respData.data
-    })
-}
 
 export const logoutAction = () => dispatch => {
     return dispatch({
-        type: LOGOUT
+        type: LOGIN_FAIL
     })
 }

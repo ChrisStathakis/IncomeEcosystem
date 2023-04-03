@@ -57,7 +57,7 @@ class VendorScreen extends React.Component{
                 balance: ele.balance,
                 
                 
-            }))
+            }));
             
             this.setState({
                 data: data,
@@ -65,7 +65,7 @@ class VendorScreen extends React.Component{
             })
         }
         
-    }
+    };
 
     render(){
         const { vendors, isAuthenticated } = this.props;

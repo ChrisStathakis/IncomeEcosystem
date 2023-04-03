@@ -5,7 +5,7 @@ import {
     LOGOUT,
     ACCESS_TOKEN,
     REFRESH_TOKEN,
-    IS_AUTHENTICATED
+    IS_AUTHENTICATED, LOGIN_FAIL
 } from "../actionTypes";
 
 
@@ -31,6 +31,7 @@ export default function authReducer(state=initialState, action){
             };
         
         case LOGIN_SUCCESS:
+            console.log('LOGIN SUCCESS', action.payload);
             localStorage.setItem(ACCESS_TOKEN, action.payload.access);
             localStorage.setItem(REFRESH_TOKEN, action.payload.refresh);
             localStorage.setItem(IS_AUTHENTICATED, 'true');
@@ -42,11 +43,19 @@ export default function authReducer(state=initialState, action){
             };
         
         case UPDATE_TOKEN:
-            localStorage.setITem(ACCESS_TOKEN, action.payload.access);
+            localStorage.setItem(IS_AUTHENTICATED, 'true');
             return {
                 ...state,
-                accessToken: action.payload.access
+                accessToken: action.payload.access,
+                isAuthenticated: 'true'
             };
+        case LOGIN_FAIL:
+            console.log('login fail reducer');
+            localStorage.removeItem(IS_AUTHENTICATED);
+            return {
+                ...state,
+                isAuthenticated: false
+            }
 
         case LOGOUT:
             localStorage.removeItem("accessToken");

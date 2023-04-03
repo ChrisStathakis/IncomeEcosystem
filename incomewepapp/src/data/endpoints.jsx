@@ -10,3 +10,7 @@ export const VENDOR_DETAIL_ENDPOINT = BASE_URL + 'vendors/detail/';
 export const INVOICE_LIST_ENDPOINT = BASE_URL + 'vendors/invoices/list/';
 export const INVOICE_UPDATE_ENDPOINT = BASE_URL + 'vendors/invoices/update/';
 export const PAYMENT_LIST_ENDPOINT = BASE_URL + 'vendors/payments/list/';
+export const PAYMENT_UPDATE_ENDPOINT = BASE_URL + 'vendors/payments/update/';
+
+export const INCOMES_LIST_ENDPOINT = BASE_URL + 'api/incomes/list/incomes/';
+export const INCOMES_DETAIL_ENDPOINT = BASE_URL + 'api/incomes/list/incomes/';
