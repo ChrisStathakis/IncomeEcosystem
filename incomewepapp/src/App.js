@@ -6,6 +6,7 @@ import MySidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import VendorsScreen from "./scenes/vendorsScreen/VendorsScreen";
 import LogoutScreen from "./scenes/global/LogoutScreen";
+import IncomeView from "./scenes/incomes/index";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./scenes/theme";
 import LoginScreen from "./scenes/global/loginScreen";
@@ -36,6 +37,7 @@ function App(props) {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/vendors/" element={<VendorsScreen />} />
                 <Route path="/vendor/:vendor_id" element={<VendorDetailScreen />} />
+                <Route path="/incomes/" element={<IncomeView />} />
                 <Route path="/logout/" element={<LogoutScreen />} />
               </Routes>
                   
