@@ -7,8 +7,9 @@ export const fetchIncomes = () => dispatch => {
     axiosInstance.get(INCOMES_LIST_ENDPOINT)
         .then(
             respData=>{
-                dispatch({
-                    type: FETCH_INCOME,
+                console.log('response', respData)
+                return dispatch({
+                    type: FETCH_INCOMES,
                     payload: respData.data
                 })
             }
@@ -29,7 +30,8 @@ export const createIncome = (data) => dispatch => {
         )
 }
 
-export const updateInvoice = (data) => dispatch => {
+export const updateIncome = (data) => dispatch => {
+    console.log('ipdata')
     const endpoint = INCOMES_DETAIL_ENDPOINT + `${data.id}/`;
     axiosInstance.put(endpoint, data)
         .then(
@@ -48,7 +50,8 @@ export const deleteInvoice = data => dispatch =>{
     axiosInstance.delete(endpoint)
         .then(respData=>{
             dispatch({
-                type: DELETE_INCOME
+                type: DELETE_INCOME,
+                payload: data
             })
         })
 }

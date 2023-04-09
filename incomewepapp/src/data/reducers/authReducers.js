@@ -10,9 +10,9 @@ import {
 
 
 const initialState = {
-    accessToken: localStorage.getItem(ACCESS_TOKEN),
-    refreshToken: localStorage.getItem(REFRESH_TOKEN),
-    isAuthenticated: localStorage.getItem(IS_AUTHENTICATED ? IS_AUTHENTICATED : 'false'),
+    accessToken: '',
+    refreshToken: '',
+    isAuthenticated: false,
     profile: null
 };
 
@@ -51,10 +51,10 @@ export default function authReducer(state=initialState, action){
             };
         case LOGIN_FAIL:
             console.log('login fail reducer');
-            localStorage.removeItem(IS_AUTHENTICATED);
+            
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: 'false'
             }
 
         case LOGOUT:

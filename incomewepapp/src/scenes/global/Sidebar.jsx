@@ -4,17 +4,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 
 import { tokens } from "../theme";
@@ -111,8 +101,32 @@ const MySidebar = () =>{
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                            />
-                            <Link to="/vendors/">Vendors Link</Link>
+                        />
+                        <MenuItem 
+                            component={<Link to='/vendors/' />}
+                            selected={selected}
+                            setSelected={setSelected}
+                            title="Vendors"
+                            onClick={()=>(console.log('ff'))}>Vendors 
+                        </MenuItem>
+                        <MenuItem 
+                            component={<Link to='/incomes/' />}
+                            selected={selected}
+                            setSelected={setSelected}
+                            title="Vendors"
+                            >Incomes 
+                        </MenuItem>
+                        <MenuItem 
+                            component={<Link to='/analysis/' />}
+                            selected={selected}
+                            setSelected={setSelected}
+                            title="Vendors"
+                            >Analysis 
+                        </MenuItem>
+                       
+                                
+                            
+                            
                         
                     </Box>
                 </Menu>

@@ -1,18 +1,17 @@
-import React, {setState} from 'react';
+import React, {useState} from 'react';
 import { Box, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 
 const columns = [
-    { field: 'id', headerName: "ID", flex:1},
-    { field:'date', headerName: "Date", flex:1},
-    { field:'value', headerName:"Value", flex:1}
+    { field:'date_expired', headerName: "Date", flex:1},
+    { field:'sum_z', headerName:"Value", flex:1},
+    { field:'pos', headerName:"POS", flex: 1},
+    { field:"taxes_6", headerName:"6%", flex:1}
 ]
 
 
 export default function IncomeList(props){
-
-    const [search, setSearch] = setState('');
 
 
     return (
@@ -20,7 +19,7 @@ export default function IncomeList(props){
             m="40px 0 0 0 0"
             height="75vh"
         >
-            {props.incomes.results ? <DataGrid columns={columns} rows={props.incomes.results}   /> : <p>No data </p> }
+            <DataGrid columns={columns} rows={props.list.results} onRowClick={(params)=> props.handleDataGrid(params.row)}  />
         </Box>
     )
 }

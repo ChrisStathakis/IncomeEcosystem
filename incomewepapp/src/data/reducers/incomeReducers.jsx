@@ -18,18 +18,18 @@ export default function incomeReducers(state=initialStore, action){
         
         case CREATE_INCOME:
             instance = action.payload;
-            results = [instance, ...state.incomes];
-            new_invoices = {...state.invoices, results: results};
+            results = [instance, ...state.incomes.results];
+            new_invoices = {...state.incomes, results: results};
             return {...state, incomes: new_invoices, income: instance};
 
         case UPDATE_INCOME:
             instance = action.payload;
-            results = state.invoices.results.map(item => item.id === action.payload.id ? action.payload : item);
+            results = state.incomes.results.map(item => item.id === action.payload.id ? action.payload : item);
             new_invoices = {...state.incomes, results: results};
             return { ...state,incomes: new_invoices };
 
         case DELETE_INCOME:
-            results = state.invoices.results.filter(item => item.id !== action.payload.id);
+            results = state.incomes.results.filter(item => item.id !== action.payload.id);
             new_invoices = {...state.incomes, results:results}
             return {...state, incomes: new_invoices}
 

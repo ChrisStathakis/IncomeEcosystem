@@ -1,15 +1,13 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { Navigate } from "react-router-dom";
 
 import IncomeForm from "./components/IncomeForm";
 import IncomeList from './components/IncomeList';
-import { fetchIncomes, createIncome } from '../../data/actions/incomeActions.jsx';
+import { fetchIncomes, createIncome, updateIncome, deleteInvoice } from '../../data/actions/incomeActions.jsx';
 import withRouter from "../../components/withRouter";
-
-
 
 
 class IncomeView extends React.Component{
@@ -20,8 +18,11 @@ class IncomeView extends React.Component{
         this.state = {
             show:{
                 list: true,
-                detail: false
-            }
+                detail: false,
+                editForm: false
+            },
+            instance:{},
+            
         }
     }
 
@@ -29,28 +30,42 @@ class IncomeView extends React.Component{
         this.props.fetchIncomes();
     }
 
-    handleCreateForm = (data) => {
-        this.props.createIncome(data);
+    handleForm = (data, editForm) => { if(editForm) {this.props.updateIncome(data)} else {this.props.createIncome(data)} this.closeForm();}
+
+    handleEditForm = (data) => {this.props.updateIncome(data); this.closeForm();}
+
+    handleDelete = (data) =>{ this.props.deleteInvoice(data); this.closeForm(); };
+
+    handleDataGrid = (params) => {
         this.setState({
             ...this.state,
-            show: {
-                list:true,
-                detail:false
-            }
+            instance: params,
+            show:{
+                editForm:true,
+                detail:true
+            },
         })
     }
+    showForm = () => {this.setState({...this.state, show:{list:false, detail:true}})}
 
-    closeFormWindow = () => {this.setState({...this.state, show: {list:true, detail: false}})}
+    closeForm = () => {this.setState({...this.state, show: {list:true, detail: false, showEdit: false}})}
 
     render() {
-        const { show } = this.state;
+        
+        const { show, instance } = this.state;
         const { incomes, isAuthenticated } = this.props;
         if ( isAuthenticated === 'false'  || isAuthenticated === null){return <Navigate to="/login/" />}
+        
+
         return(
            <Box m="20px">
                 <Typography variant="h1" component="h2">Incomes</Typography>
-                {show.list ? <IncomeList incomes={incomes} />: null}
-                {show.details ? <IncomeForm handleForm={this.handleCreateForm} closeForm={this.closeForm} /> : null}
+                {show.detail ?
+                    <IncomeForm handleForm={this.handleForm} closeForm={this.closeForm} editForm={show.editForm} instance={instance} deleteForm={this.handleDelete} /> 
+                    : <Button sx={{marginBottom:'3%', marginTop:'1%'}} variant='contained' color='success' onClick={this.showForm} >CREATE INCOME </Button>
+                    }
+                {show.list && incomes.results ? <IncomeList handleDataGrid={this.handleDataGrid} list={incomes} />: null} 
+                
 
            </Box>
         )
@@ -58,7 +73,8 @@ class IncomeView extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    incomes: state.incomeReducers.incomes
+    incomes: state.incomeReducers.incomes,
+    isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default compose(withRouter, connect(mapStateToProps, {fetchIncomes, createIncome}))(IncomeView);
+export default compose(withRouter, connect(mapStateToProps, {fetchIncomes, createIncome, updateIncome, deleteInvoice}))(IncomeView);

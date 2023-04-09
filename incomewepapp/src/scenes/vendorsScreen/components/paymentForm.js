@@ -1,4 +1,4 @@
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid, MenuItem, TextField, Typography, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React, {useState } from 'react';
 import { connect } from 'react-redux';
@@ -20,11 +20,7 @@ const PaymentForm  = (props) => {
     const [payment_method, setPaymentMethod] = useState(instance.payment_method);
     const [title, setTitle] = useState(instance.title);
 
-    handleSubmit = () => {
-        const data = {date: date, value:value, payment_method: payment_method, vendor: vendor.id, id:instance.id}
-        props.updatePayment(data);
-        props.action()
-    }
+   
 
     return (
         <div>
@@ -64,7 +60,7 @@ const PaymentForm  = (props) => {
                             ))}
                              </TextField>
                         <TextField  InputLabelProps={{ shrink: true }}  value={value} onChange={(e)=> setValue(e.target.value)} label='Title' />
-                        <Button onClick={handleSubmit} variant="contained" sx={{ marginTop:2 }}>Save</Button>
+                        <Button  variant="contained" sx={{ marginTop:2 }}>Save</Button>
                     </Box>
                 </Grid>
             </Grid>

@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { REFRESH_TOKEN_ENDPOINT, BASE_URL } from './endpoints';
-import {ACCESS_TOKEN, LOGIN_FAIL, REFRESH_TOKEN, UPDATE_TOKEN} from "./actionTypes";
+import {LOGIN_FAIL, REFRESH_TOKEN, UPDATE_TOKEN} from "./actionTypes";
 import { Buffer } from 'buffer';
-import store from "../data/store";
+import {store} from "../data/store";
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 55000,
     headers: {
-        'Authorization': localStorage.getItem(ACCESS_TOKEN) ? "Bearer " + localStorage.getItem(ACCESS_TOKEN): null,
+        'Authorization':  "Bearer  " + store.getState().authReducer.accessToken,
         'Content-Type': 'application/json',
         'accept': 'application/json'
     }
@@ -55,9 +55,8 @@ axiosInstance.interceptors.response.use(
                     return axiosInstance
                     .post(REFRESH_TOKEN_ENDPOINT, {refresh: refreshToken})
                     .then((response) => {
-                        localStorage.setItem(ACCESS_TOKEN, response.data.access);
-                        axiosInstance.defaults.headers['Authorization'] = "Bearer " + response.data.access;
-                        originalRequest.headers['Authorization'] = "Bearer " + response.data.access;
+                        axiosInstance.defaults.headers['Authorization'] = "Bearer  " + response.data.access;
+                        originalRequest.headers['Authorization'] = "Bearer  " + response.data.access;
                         store.dispatch({type: UPDATE_TOKEN, payload: response.data});
                         return axiosInstance(originalRequest);
                     })
@@ -71,7 +70,7 @@ axiosInstance.interceptors.response.use(
                 }
             } else {
                 console.log("Refresh token not available.");
-                localStorage.removeItem('isAuthenticated');
+                store.dispatch({type: LOGIN_FAIL});
 
             }
     }

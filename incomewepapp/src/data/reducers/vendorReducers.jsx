@@ -1,5 +1,5 @@
 import { CREATE_VENDOR_INVOICE, CREATE_VENDOR_PAYMENT, FETCH_VENDOR, FETCH_VENDORS, 
-    FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, DELETE_VENDOR_INVOICE, UPDATE_VENDOR, UPDATE_VENDOR_INVOICE } from '../actionTypes';
+    FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, DELETE_VENDOR_INVOICE, UPDATE_VENDOR, UPDATE_VENDOR_INVOICE, UPDATE_PAYMENT, DELETE_PAYMENT } from '../actionTypes';
 
 const initialState  = {
     vendors: [],
@@ -11,6 +11,9 @@ const initialState  = {
 
 export default function vendorReducers(state=initialState, action){
     let new_invoices = [];
+    let payment = {}
+    let payment_results = []
+
     switch(action.type){
 
         case FETCH_VENDORS:
@@ -74,7 +77,31 @@ export default function vendorReducers(state=initialState, action){
                 ...state,
                 payments: action.payload
             }
-       
+        
+        case UPDATE_PAYMENT:
+            payment = action.payload;
+            payment_results = state.payments.results.map(ele=>ele.id !== payment.id ? ele : payment);
+            return {
+                ...state,
+                payments: {
+                    ...state.payments,
+                    results: payment_results
+                }
+            }
+        
+            case CREATE_VENDOR_PAYMENT:
+                payment = action.payload;
+                payment_results = [payment, ...state.payments.results];
+                return {
+                    ...state,
+                    payments: {
+                        ...state.payments,
+                        results: payment_results
+                    }
+                }
+            
+            case DELETE_PAYMENT:
+                payment.action.payload;
         
         default:
             return state
