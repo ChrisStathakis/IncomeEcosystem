@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Sum, Q
 from django.conf import settings
 from django.forms import ModelForm
+from django.db.models.functions import TruncMonth
 from django.shortcuts import reverse
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -156,7 +157,23 @@ class Invoice(models.Model):
 
     def tag_value(self):
         return f'{self.final_value} {CURRENCY}'
+    
+    
+    @staticmethod
+    def month_analysis(data):
+        new_data = data.annotate(month=TruncMonth('date')).values('month').annotate(total=Sum('final_value')).values('month', 'total').order_by('month')
+        return new_data
 
+    @staticmethod
+    def vendor_analysis(data):
+        new_data = data.values('vendor__title').annotate(total=Sum('final_value')).order_by('total')
+        return new_data
+    
+    @staticmethod
+    def payment_method_analysis(data):
+        new_data = data.values('payment_method__title').annotate(total=Sum('final_value')).order_by('total')
+        return new_data
+    
     @staticmethod
     def filters_data(request, qs):
         date_start, date_end, date_range = initial_date(request, 6)
@@ -198,6 +215,23 @@ class Payment(models.Model):
         if date_start and date_end:
             qs = qs.filter(date__range=[date_start, date_end])
         return qs
+
+    # for api
+
+    @staticmethod
+    def month_analysis(data):
+        new_data = data.annotate(month=TruncMonth('date')).values('month').annotate(total=Sum('value')).values('month', 'total').order_by('date')
+        return new_data
+    
+    @staticmethod
+    def vendor_analysis(data):
+        new_data = data.values('vendor__title').annotate(total=Sum('value')).values('vendor__title', 'total').order_by('total')
+        return new_data
+    
+    @staticmethod
+    def payment_analysis(data):
+        new_data = data.values('payment_method__title').annotate(total=Sum('value')).values('payment_method__title', 'total').order_by('total')
+        return new_data
 
     # for reports
     

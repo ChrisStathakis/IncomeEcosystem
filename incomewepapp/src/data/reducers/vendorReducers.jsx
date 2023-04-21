@@ -1,11 +1,16 @@
 import { CREATE_VENDOR_INVOICE, CREATE_VENDOR_PAYMENT, FETCH_VENDOR, FETCH_VENDORS, 
-    FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, DELETE_VENDOR_INVOICE, UPDATE_VENDOR, UPDATE_VENDOR_INVOICE, UPDATE_PAYMENT, DELETE_PAYMENT } from '../actionTypes';
+    FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, DELETE_VENDOR_INVOICE, UPDATE_VENDOR, UPDATE_VENDOR_INVOICE, UPDATE_PAYMENT, DELETE_PAYMENT, INVOICE_ANALYSIS } from '../actionTypes';
 
 const initialState  = {
     vendors: [],
     vendor: { },
     payments: [],
-    invoices: []
+    invoices: [],
+    invoice_analysis:{
+        monthly: [],
+        vendors_analysis: [],
+        payment_method_analysis: []
+    }
 }
 
 
@@ -101,7 +106,22 @@ export default function vendorReducers(state=initialState, action){
                 }
             
             case DELETE_PAYMENT:
-                payment.action.payload;
+                
+                return {
+                    ...state
+                }
+
+            case INVOICE_ANALYSIS:
+                const invoice_analysis = {
+                    monthly: action.payload.monthly, 
+                    vendors_analysis: action.payload.vendors_analysis,
+                    payment_method_analysis: action.payload.payment_method_analysis}
+
+                return {
+                    ...state,
+                    invoice_analysis: invoice_analysis
+
+                }
         
         default:
             return state

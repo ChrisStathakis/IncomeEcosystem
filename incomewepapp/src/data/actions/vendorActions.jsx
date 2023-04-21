@@ -3,13 +3,14 @@ import {
     INVOICE_LIST_ENDPOINT,
     INVOICE_UPDATE_ENDPOINT,
     PAYMENT_LIST_ENDPOINT,
-    VENDORS_LIST_ENDPOINT, VENDOR_DETAIL_ENDPOINT, PAYMENT_UPDATE_ENDPOINT
+    VENDORS_LIST_ENDPOINT, VENDOR_DETAIL_ENDPOINT, PAYMENT_UPDATE_ENDPOINT, VENDORS_INVOICES_ANALYSIS_ENDPOINT, VENDORS_PAYMENT_ANALYSIS_ENDPOINT
 } from "../endpoints";
 import {
     CREATE_VENDOR_INVOICE, UPDATE_PAYMENT,
     CREATE_VENDOR_PAYMENT, 
-    FETCH_VENDOR, FETCH_VENDORS, FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, UPDATE_VENDOR, DELETE_VENDOR_INVOICE, UPDATE_VENDOR_INVOICE
+    FETCH_VENDOR, FETCH_VENDORS, FETCH_VENDOR_INVOICES, FETCH_VENDOR_PAYMENTS, UPDATE_VENDOR, DELETE_VENDOR_INVOICE, UPDATE_VENDOR_INVOICE, INVOICE_ANALYSIS, PAYMENT_ANALYSIS
 } from "../actionTypes"
+import { AxiosHeaders } from "axios";
 
 
 
@@ -213,4 +214,31 @@ export const updatePayment = (data) => dispatch =>{
                     )
             }
         )
+}
+
+
+export const fetchInvoiceAnalysis = (query='') => dispatch => {
+    let endpoint = VENDORS_INVOICES_ANALYSIS_ENDPOINT;
+    if (query.length > 3) { endpoint = endpoint + query};
+    axiosInstance.get(endpoint)
+        .then(respData=>{
+            const response = respData.data;
+            return dispatch({
+                type: INVOICE_ANALYSIS,
+                payload: response
+            })
+        })
+};
+
+export const fetchPaymentsAnalysis = (query='') => dispatch => {
+    let endpoint = VENDORS_PAYMENT_ANALYSIS_ENDPOINT;
+    if (query.length >2) { endpoint = endpoint + query};
+    axiosInstance.get(endpoint)
+        .then(respData=>{
+            const response = respData.data;
+            return dispatch({
+                type: PAYMENT_ANALYSIS,
+                payload: response
+            })
+        })
 }

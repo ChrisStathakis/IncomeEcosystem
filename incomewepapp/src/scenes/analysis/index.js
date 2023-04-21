@@ -21,7 +21,7 @@ function HomepageAnalysis(props){
                 .then(respData=>{
                     const data = respData.data
                     console.log('data',data)
-                    setTotal(data.total_income);
+                    setTotal(data.total_incomes);
                     setCount(data.count_incomes);
                     setAverage(data.average_incomes);
                 }
@@ -39,10 +39,11 @@ function HomepageAnalysis(props){
                 <Card>
                     <CardHeader title="INCOMES" />
                     <CardContent>
-                        Total incomes: {total}
+                        Total incomes: {total} <br />
+                        Count: {count} | Average: {average}
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="contained" color="primary">Learn More</Button>
+                        <Link to='/analysis/incomes/'>  <Button size="small" variant="contained" color="primary">Learn More</Button> </Link>
                     </CardActions>
                 </Card>
 
@@ -51,12 +52,12 @@ function HomepageAnalysis(props){
             <Grid item xs={4}>
         
                 <Card>
-                    <CardHeader title="INCOMES" />
+                    <CardHeader title="VENDORS" />
                     <CardContent>
 
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="contained" color="primary">Learn More</Button>
+                    <Link to='/analysis/vendors/'>  <Button size="small" variant="contained" color="primary">Learn More</Button> </Link>
                     </CardActions>
                 </Card>
         

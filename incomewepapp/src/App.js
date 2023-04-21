@@ -15,7 +15,9 @@ import { Provider } from "react-redux";
 import {store, persistor} from "./data/store";
 import VendorDetailScreen from "./scenes/vendorsScreen/VendorDetailScreen";
 import HomepageAnalysis from "./scenes/analysis";
-
+import AnalysisIncomeView from "./scenes/analysis/income_analysis_view";
+import VendorAnalysisView from "./scenes/analysis/vendor_analysis_view";
+import BalanceSheetView from "./scenes/analysis/balance_sheet";
 
 
 
@@ -41,6 +43,9 @@ function App(props) {
                 <Route path="/vendor/:vendor_id" element={<VendorDetailScreen />} />
                 <Route path="/incomes/" element={<IncomeView />} />
                 <Route path='/analysis/' element={<HomepageAnalysis />} />
+                <Route path='/analysis/incomes/' element={<AnalysisIncomeView />} />
+                <Route path="/analysis/vendors/" element={<VendorAnalysisView />} />
+                <Route path="/balance-sheet/"  element={<BalanceSheetView />} />
                 <Route path="/logout/" element={<LogoutScreen />} />
               </Routes>
                   

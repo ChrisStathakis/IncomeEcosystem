@@ -1,10 +1,15 @@
-import { CLEAR_SEARCH, PAYMENT_METHODS, SEARCH } from "../actionTypes";
+import { BALANCE_SHEET, CLEAR_SEARCH, PAYMENT_METHODS, SEARCH } from "../actionTypes";
 
 
 
 const initialState = {
     search_name: '',
-    paymentMethods: []
+    paymentMethods: [],
+    balanceSheet:{
+        totals:{},
+        count:{},
+        monthly:{}
+    }
 }
 
 export default function generalReducers(state=initialState, action) {
@@ -26,6 +31,11 @@ export default function generalReducers(state=initialState, action) {
             return {
                 ...state,
                 paymentMethods: action.payload
+            }
+        case BALANCE_SHEET:
+            return {
+                ...state,
+                balanceSheet: action.payload
             }
         default:
             return state

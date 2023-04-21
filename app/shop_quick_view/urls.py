@@ -5,6 +5,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView
 )
 
+from analysis.api.views import BalanceSheetApiView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('costumers/', include('costumers.urls')),
@@ -26,6 +28,7 @@ urlpatterns = [
     # api
     path('api/', include('frontend.api.urls')),
     path('api/vendors/', include('vendors.api.urls')),
-    path('api/incomes/', include('incomes.api.urls'))
+    path('api/incomes/', include('incomes.api.urls')),
+    path('api/balance-sheet/', BalanceSheetApiView.as_view())
 
 ]

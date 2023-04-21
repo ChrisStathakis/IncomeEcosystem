@@ -2,11 +2,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.viewsets import ModelViewSet
-
+from rest_framework.permissions import IsAuthenticated
+from django_filters import rest_framework as django_filters
+from django.http import HttpResponse
 from django.db.models import Sum, Avg
 
 from .serializers import Income, IncomeSerializer
-
+from .filters import DateRangeFilter
 
 @api_view(['GET'])
 def homepage_view(request, format=None):
@@ -19,17 +21,21 @@ def homepage_view(request, format=None):
 
 @api_view(['GET'])
 def analysis_api_view(request):
-    data = Income.filters_data(request, Income.objects.all())
-    total_incomes = data.aggregate(Sum('value'))['value__sum'] if data.exists() else 0
-    count_incomes = data.count()
-    average_incomes = data.aggregate(Avg('value'))['value__avg'] if data.exists() else 0
+    if not request.user.is_authenticated:
+        return Response({'error': 'Token does not exist'}, status=401)
+    data = Income.api_filter_data(request)
+    total_data = Income.api_analyse_data(data)
+    data_per_month = Income.api_analyze_per_month(data)
+    
     return Response({
-        'total_incomes': total_incomes,
-        'count_incomes': count_incomes,
-        'average_incomes': average_incomes
+        'total_data': total_data,
+        'data_per_month': data_per_month,
     })
 
 class IncomeViewSet(ModelViewSet):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
+    filter_backends = (django_filters.DjangoFilterBackend, )
+    filterset_class = DateRangeFilter
+    permission_classes = [IsAuthenticated]
 

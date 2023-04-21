@@ -123,6 +123,13 @@ const MySidebar = () =>{
                             title="Vendors"
                             >Analysis 
                         </MenuItem>
+                        <MenuItem 
+                            component={<Link to='/logout/' />}
+                            selected={selected}
+                            setSelected={setSelected}
+                            title="Logout"
+                            >Logout 
+                        </MenuItem>
                        
                                 
                             

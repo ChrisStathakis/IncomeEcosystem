@@ -12,7 +12,7 @@ import {
 const initialState = {
     accessToken: '',
     refreshToken: '',
-    isAuthenticated: false,
+    isAuthenticated: 'false',
     profile: null
 };
 
@@ -31,19 +31,17 @@ export default function authReducer(state=initialState, action){
             };
         
         case LOGIN_SUCCESS:
-            console.log('LOGIN SUCCESS', action.payload);
-            localStorage.setItem(ACCESS_TOKEN, action.payload.access);
-            localStorage.setItem(REFRESH_TOKEN, action.payload.refresh);
-            localStorage.setItem(IS_AUTHENTICATED, 'true');
+            console.log('login success', action.payload);
+        
             return {
                 ...state,
-                isAuthenticated: true,
+                isAuthenticated: 'true',
                 accessToken: action.payload.access,
                 refreshToken: action.payload.refresh,
             };
         
         case UPDATE_TOKEN:
-            localStorage.setItem(IS_AUTHENTICATED, 'true');
+            
             return {
                 ...state,
                 accessToken: action.payload.access,
@@ -53,14 +51,12 @@ export default function authReducer(state=initialState, action){
             console.log('login fail reducer');
             
             return {
-                ...state,
-                isAuthenticated: 'false'
+                isAuthenticated: 'false',
+                accessToken: '',
+                refreshToken: ''
             }
 
         case LOGOUT:
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            localStorage.setItem("isAuthenticated", 'false');
             return {
                 isAuthenticated: 'false',
                 accessToken: '',

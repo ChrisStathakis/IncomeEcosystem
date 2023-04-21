@@ -1,11 +1,16 @@
 from django.db import models
 from django.shortcuts import reverse
+from django.db.models import Sum, Avg
+from django.db.models.functions import TruncMonth
 from tinymce.models import HTMLField
 
 from frontend.tools import initial_date
 
 from django.conf import settings
+from operator import attrgetter
+from itertools import chain
 
+from datetime import datetime
 CURRENCY = settings.CURRENCY
 
 
@@ -42,6 +47,37 @@ class Income(models.Model):
 
     def get_delete_url(self):
         return reverse('incomes:delete', kwargs={'pk': self.id})
+    
+    @staticmethod
+    def api_filter_data(request):
+        # example of my query =>  date_range_after=1%2F1%2F2023&date_range_before=31%2F12%2F2023
+        date_start = request.GET.get('date_range_after', datetime.now().date().replace(month=1, day=1))
+        date_end = request.GET.get('date_range_before', datetime.now().date().replace(month=12, day=31))
+        qs = Income.objects.filter(date_expired__range=[date_start, date_end])
+        return qs
+    
+    @staticmethod
+    def api_analyse_data(qs):
+        # total data
+        totals = qs.aggregate(Sum('sum_z'), Sum('pos'), Sum('cash'), Sum('order_cost'))
+        averanges = qs.aggregate(Avg('sum_z'), Avg('pos'), Avg('cash'), Avg('order_cost'))
+        count = qs.count()
+        return {
+            'totals': totals,
+            'averages': averanges,
+            'count': count
+        }
+        
+    
+    @staticmethod
+    def api_analyze_per_month(qs):
+        analysis = qs.annotate(month=TruncMonth('date_expired')).values('month').annotate(
+            total=Sum('logistic_value'), z_total=Sum('sum_z'), pos_total=Sum('pos'), cash_total=Sum('cash')
+        ).values('month', 'total', 'z_total', 'pos_total', 'cash_total').order_by('month')
+
+        return {
+            'analysis_per_month': analysis,
+        }
 
     @staticmethod
     def filters_data(request, qs):

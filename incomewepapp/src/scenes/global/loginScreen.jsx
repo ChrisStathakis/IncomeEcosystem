@@ -28,7 +28,7 @@ const LoginScreen = (props) => {
     const handlePassword = (event) => {setPassword(event.target.value)};
 
 
-    return props.isAuthenticated !== 'false' ? <Navigate to='/' /> :(
+    return props.isAuthenticated === 'true' ? <Navigate to='/' /> :(
         <Box
           sx={{
             marginTop: 8,

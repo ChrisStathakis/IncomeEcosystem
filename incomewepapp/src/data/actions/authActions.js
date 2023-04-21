@@ -7,6 +7,7 @@ export const loginAction = data => dispatch => {
     axioInstance.post(TOKEN_ENDPOINT, data)
         .then(
             respData=>{
+                console.log('login succees', respData.data)
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: respData.data

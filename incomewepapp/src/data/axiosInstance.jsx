@@ -4,22 +4,34 @@ import {LOGIN_FAIL, REFRESH_TOKEN, UPDATE_TOKEN} from "./actionTypes";
 import { Buffer } from 'buffer';
 import {store} from "../data/store";
 
+
+
+
+
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 55000,
     headers: {
-        'Authorization':  "Bearer  " + store.getState().authReducer.accessToken,
+    
         'Content-Type': 'application/json',
         'accept': 'application/json'
     }
 });
 
+axiosInstance.interceptors.request.use(function (config) {
+    const token = store.getState().authReducer.accessToken
+      config.headers.Authorization = `Bearer  ${token}`;
+      return config;
+  });
 
-
+  
 axiosInstance.interceptors.response.use(
     response => response,
     error=>{
         const originalRequest = error.config;
+        console.log('error process start', store.getState().authReducer.accessToken)
+        console.log('refreshToken', originalRequest)
+
         if (!error.response){
             console.log('Cant find response');
             return Promise.reject({message: 'The app has failed you'})
@@ -35,9 +47,11 @@ axiosInstance.interceptors.response.use(
             error.response.status === 401 &&
             error.response.statusText === "Unauthorized")
         {   
+            console.log('statrt refrsj')
             const state = store.getState()
             const refreshToken = state.authReducer.refreshToken;
-            if (typeof refreshToken === 'undefined'){
+            if (typeof refreshToken === ''){
+                console.log('no refresh token')
                 store.dispatch({type: LOGIN_FAIL});
                 console.log('token not found', error.response.message);
                 return Promise.reject({message: 'logout'})
@@ -55,8 +69,8 @@ axiosInstance.interceptors.response.use(
                     return axiosInstance
                     .post(REFRESH_TOKEN_ENDPOINT, {refresh: refreshToken})
                     .then((response) => {
-                        axiosInstance.defaults.headers['Authorization'] = "Bearer  " + response.data.access;
-                        originalRequest.headers['Authorization'] = "Bearer  " + response.data.access;
+                        axiosInstance.defaults.headers['Authorization'] = `Bearer  ${response.data.access}`;
+                        originalRequest.headers['Authorization'] = `Bearer  ${response.data.access}`;
                         store.dispatch({type: UPDATE_TOKEN, payload: response.data});
                         return axiosInstance(originalRequest);
                     })
